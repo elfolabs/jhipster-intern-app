@@ -1,0 +1,101 @@
+{
+  "applications": "*",
+  "changelogDate": "20230727233434",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "media_file",
+  "fields": [
+    {
+      "fieldName": "mediaType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "Refs: www.iana.org/assignments/media-types/media-types.xhtml"
+    },
+    {
+      "fieldName": "fileName",
+      "fieldType": "String",
+      "javadoc": "Nome do arquivo"
+    },
+    {
+      "fieldName": "fileExtension",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mediaTitle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mediaDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publico",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"],
+      "javadoc": "default false"
+    },
+    {
+      "fieldName": "repoName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "Nome do Bucket do repositório S3"
+    },
+    {
+      "fieldName": "repoUuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "UUID no repositório S3"
+    },
+    {
+      "fieldName": "repoFolder",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "Folder de destino no S3"
+    },
+    {
+      "fieldName": "repoPath",
+      "fieldType": "String",
+      "javadoc": "path completo com folder de destino e nome do arquivo no repositorio"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "width",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dataRegistro",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataExclusao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "tamanhoBytes",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MediaFile",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pessoa",
+      "otherEntityRelationshipName": "mediaFile",
+      "relationshipName": "fotoRosto",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

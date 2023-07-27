@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mediaFile">
+      <h2 data-cy="mediaFileDetailsHeading"><span>Media File</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ mediaFile.id }}</span>
+        </dd>
+        <dt><span ngbTooltip="Refs: www.iana.org/assignments/media-types/media-types.xhtml">Media Type</span></dt>
+        <dd>
+          <span>{{ mediaFile.mediaType }}</span>
+        </dd>
+        <dt><span ngbTooltip="Nome do arquivo">File Name</span></dt>
+        <dd>
+          <span>{{ mediaFile.fileName }}</span>
+        </dd>
+        <dt><span>File Extension</span></dt>
+        <dd>
+          <span>{{ mediaFile.fileExtension }}</span>
+        </dd>
+        <dt><span>Media Title</span></dt>
+        <dd>
+          <span>{{ mediaFile.mediaTitle }}</span>
+        </dd>
+        <dt><span>Media Description</span></dt>
+        <dd>
+          <span>{{ mediaFile.mediaDescription }}</span>
+        </dd>
+        <dt><span ngbTooltip="default false">Publico</span></dt>
+        <dd>
+          <span>{{ mediaFile.publico }}</span>
+        </dd>
+        <dt><span ngbTooltip="Nome do Bucket do repositório S3">Repo Name</span></dt>
+        <dd>
+          <span>{{ mediaFile.repoName }}</span>
+        </dd>
+        <dt><span ngbTooltip="UUID no repositório S3">Repo Uuid</span></dt>
+        <dd>
+          <span>{{ mediaFile.repoUuid }}</span>
+        </dd>
+        <dt><span ngbTooltip="Folder de destino no S3">Repo Folder</span></dt>
+        <dd>
+          <span>{{ mediaFile.repoFolder }}</span>
+        </dd>
+        <dt><span ngbTooltip="path completo com folder de destino e nome do arquivo no repositorio">Repo Path</span></dt>
+        <dd>
+          <span>{{ mediaFile.repoPath }}</span>
+        </dd>
+        <dt><span>Thumbnail</span></dt>
+        <dd>
+          <span>{{ mediaFile.thumbnail }}</span>
+        </dd>
+        <dt><span>Width</span></dt>
+        <dd>
+          <span>{{ mediaFile.width }}</span>
+        </dd>
+        <dt><span>Height</span></dt>
+        <dd>
+          <span>{{ mediaFile.height }}</span>
+        </dd>
+        <dt><span>Data Registro</span></dt>
+        <dd>
+          <span>{{ mediaFile.dataRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Exclusao</span></dt>
+        <dd>
+          <span>{{ mediaFile.dataExclusao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Tamanho Bytes</span></dt>
+        <dd>
+          <span>{{ mediaFile.tamanhoBytes }}</span>
+        </dd>
+        <dt><span>Foto Rosto</span></dt>
+        <dd>
+          <div *ngIf="mediaFile.fotoRosto">
+            <a [routerLink]="['/pessoa', mediaFile.fotoRosto?.id, 'view']">{{ mediaFile.fotoRosto?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/media-file', mediaFile.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

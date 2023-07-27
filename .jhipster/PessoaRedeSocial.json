@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230727233437",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "pessoa_rede_social",
+  "fields": [
+    {
+      "fieldName": "nomeRede",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endereco",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "dataRegistro",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataExclusao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "divulgarNoAplicativo",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PessoaRedeSocial",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pessoa",
+      "otherEntityRelationshipName": "pessoaRedeSocial",
+      "relationshipName": "redeSocial",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

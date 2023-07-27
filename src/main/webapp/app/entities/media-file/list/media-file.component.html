@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="MediaFileHeading">
+    <span>Media Files</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-media-file"
+        [routerLink]="['/media-file/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Media File </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="mediaFiles?.length === 0">
+    <span>No mediaFiles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="mediaFiles && mediaFiles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="mediaType"><span>Media Type</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fileName"><span>File Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fileExtension"><span>File Extension</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="mediaTitle"><span>Media Title</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="mediaDescription"><span>Media Description</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="publico"><span>Publico</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="repoName"><span>Repo Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="repoUuid"><span>Repo Uuid</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="repoFolder"><span>Repo Folder</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="repoPath"><span>Repo Path</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="thumbnail"><span>Thumbnail</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="width"><span>Width</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="height"><span>Height</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataRegistro"><span>Data Registro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataExclusao"><span>Data Exclusao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tamanhoBytes"><span>Tamanho Bytes</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fotoRosto.id"><span>Foto Rosto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let mediaFile of mediaFiles; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/media-file', mediaFile.id, 'view']">{{ mediaFile.id }}</a>
+          </td>
+          <td>{{ mediaFile.mediaType }}</td>
+          <td>{{ mediaFile.fileName }}</td>
+          <td>{{ mediaFile.fileExtension }}</td>
+          <td>{{ mediaFile.mediaTitle }}</td>
+          <td>{{ mediaFile.mediaDescription }}</td>
+          <td>{{ mediaFile.publico }}</td>
+          <td>{{ mediaFile.repoName }}</td>
+          <td>{{ mediaFile.repoUuid }}</td>
+          <td>{{ mediaFile.repoFolder }}</td>
+          <td>{{ mediaFile.repoPath }}</td>
+          <td>{{ mediaFile.thumbnail }}</td>
+          <td>{{ mediaFile.width }}</td>
+          <td>{{ mediaFile.height }}</td>
+          <td>{{ mediaFile.dataRegistro | formatMediumDatetime }}</td>
+          <td>{{ mediaFile.dataExclusao | formatMediumDatetime }}</td>
+          <td>{{ mediaFile.tamanhoBytes }}</td>
+          <td>
+            <div *ngIf="mediaFile.fotoRosto">
+              <a [routerLink]="['/pessoa', mediaFile.fotoRosto?.id, 'view']">{{ mediaFile.fotoRosto?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/media-file', mediaFile.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/media-file', mediaFile.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(mediaFile)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

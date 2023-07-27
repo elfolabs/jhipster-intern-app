@@ -1,0 +1,242 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pessoa-heading" data-cy="PessoaCreateUpdateHeading">Create or edit a Pessoa</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataRegistro" ngbTooltip="default current_date, replicando do histórico"
+            >Data Registro</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dataRegistro"
+              data-cy="dataRegistro"
+              type="datetime-local"
+              class="form-control"
+              name="dataRegistro"
+              formControlName="dataRegistro"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('dataRegistro')!.invalid && (editForm.get('dataRegistro')!.dirty || editForm.get('dataRegistro')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('dataRegistro')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataRegistro')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+          <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nome')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nomeSocial">Nome Social</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeSocial"
+            id="field_nomeSocial"
+            data-cy="nomeSocial"
+            formControlName="nomeSocial"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_possuiNomeSocial">Possui Nome Social</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="possuiNomeSocial"
+            id="field_possuiNomeSocial"
+            data-cy="possuiNomeSocial"
+            formControlName="possuiNomeSocial"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_apelidoNomeFantasia"
+            ngbTooltip="Valor preferido em todas as telas, exceto a emissão de documentos médicos"
+            >Apelido Nome Fantasia</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="apelidoNomeFantasia"
+            id="field_apelidoNomeFantasia"
+            data-cy="apelidoNomeFantasia"
+            formControlName="apelidoNomeFantasia"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataNascimento">Data Nascimento</label>
+          <div class="input-group">
+            <input
+              id="field_dataNascimento"
+              data-cy="dataNascimento"
+              type="text"
+              class="form-control"
+              name="dataNascimento"
+              ngbDatepicker
+              #dataNascimentoDp="ngbDatepicker"
+              formControlName="dataNascimento"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataNascimentoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nomePai">Nome Pai</label>
+          <input type="text" class="form-control" name="nomePai" id="field_nomePai" data-cy="nomePai" formControlName="nomePai" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nomeMae">Nome Mae</label>
+          <input type="text" class="form-control" name="nomeMae" id="field_nomeMae" data-cy="nomeMae" formControlName="nomeMae" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tipoSanguineo">Tipo Sanguineo</label>
+          <select
+            class="form-control"
+            name="tipoSanguineo"
+            formControlName="tipoSanguineo"
+            id="field_tipoSanguineo"
+            data-cy="tipoSanguineo"
+          >
+            <option [ngValue]="null"></option>
+            <option *ngFor="let tipoSanguineo of tipoSanguineoValues" [value]="tipoSanguineo">tipoSanguineo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_sexoBiologicoAoNascer"
+            ngbTooltip="Obrigatorio para TipoPessoa::PESSOA_FISICA, valor default F"
+            >Sexo Biologico Ao Nascer</label
+          >
+          <select
+            class="form-control"
+            name="sexoBiologicoAoNascer"
+            formControlName="sexoBiologicoAoNascer"
+            id="field_sexoBiologicoAoNascer"
+            data-cy="sexoBiologicoAoNascer"
+          >
+            <option [ngValue]="null"></option>
+            <option *ngFor="let sexo of sexoValues" [value]="sexo">sexo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tipoPessoa" ngbTooltip="default PF">Tipo Pessoa</label>
+          <select class="form-control" name="tipoPessoa" formControlName="tipoPessoa" id="field_tipoPessoa" data-cy="tipoPessoa">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let tipoPessoa of tipoPessoaValues" [value]="tipoPessoa">tipoPessoa</option>
+          </select>
+          <div *ngIf="editForm.get('tipoPessoa')!.invalid && (editForm.get('tipoPessoa')!.dirty || editForm.get('tipoPessoa')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('tipoPessoa')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_cpf">Cpf</label>
+          <input type="text" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_cnpj">Cnpj</label>
+          <input type="text" class="form-control" name="cnpj" id="field_cnpj" data-cy="cnpj" formControlName="cnpj" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_rg"
+            ngbTooltip="RG Caso TipoPessoa::PESSOA_FISICA, e Inscrição Estadual em caso contrário"
+            >Rg</label
+          >
+          <input type="text" class="form-control" name="rg" id="field_rg" data-cy="rg" formControlName="rg" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ie" ngbTooltip="Inscricao estadual caso TipoPessoa::PESSOA_JURIDCA">Ie</label>
+          <input type="text" class="form-control" name="ie" id="field_ie" data-cy="ie" formControlName="ie" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_estadoCivil">Estado Civil</label>
+          <select class="form-control" name="estadoCivil" formControlName="estadoCivil" id="field_estadoCivil" data-cy="estadoCivil">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let estadoCivil of estadoCivilValues" [value]="estadoCivil">estadoCivil</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_observacoes">Observacoes</label>
+          <textarea
+            class="form-control"
+            name="observacoes"
+            id="field_observacoes"
+            data-cy="observacoes"
+            formControlName="observacoes"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_naturalidade">Naturalidade</label>
+          <input
+            type="text"
+            class="form-control"
+            name="naturalidade"
+            id="field_naturalidade"
+            data-cy="naturalidade"
+            formControlName="naturalidade"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_raca">Raca</label>
+          <input type="text" class="form-control" name="raca" id="field_raca" data-cy="raca" formControlName="raca" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

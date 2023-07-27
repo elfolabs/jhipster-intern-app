@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity MediaFile.
+    -->
+    <changeSet id="20230727233434-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="foto_rosto_id"
+                                 baseTableName="media_file"
+                                 constraintName="fk_media_file__foto_rosto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pessoa"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pessoaContato">
+      <h2 data-cy="pessoaContatoDetailsHeading"><span>Pessoa Contato</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ pessoaContato.id }}</span>
+        </dd>
+        <dt><span ngbTooltip="default current_date, replicando do histórico">Data Registro</span></dt>
+        <dd>
+          <span>{{ pessoaContato.dataRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Importacao</span></dt>
+        <dd>
+          <span>{{ pessoaContato.dataImportacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Exclusao</span></dt>
+        <dd>
+          <span>{{ pessoaContato.dataExclusao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ pessoaContato.descricao }}</span>
+        </dd>
+        <dt><span ngbTooltip="identificação na Rede Social, exemplo &#34;superlauro&#34;">Contato Digital Ident</span></dt>
+        <dd>
+          <span>{{ pessoaContato.contatoDigitalIdent }}</span>
+        </dd>
+        <dt><span ngbTooltip="pode ter o simbolo &#39;plus&#39;, ddi, ddd alem do numero">Telefone Numero Completo</span></dt>
+        <dd>
+          <span>{{ pessoaContato.telefoneNumeroCompleto }}</span>
+        </dd>
+        <dt><span ngbTooltip="Caso o contato seja um número de telefone">Telefone Ddd</span></dt>
+        <dd>
+          <span>{{ pessoaContato.telefoneDdd }}</span>
+        </dd>
+        <dt><span ngbTooltip="Caso o contato seja um número de telefone">Telefone Numero</span></dt>
+        <dd>
+          <span>{{ pessoaContato.telefoneNumero }}</span>
+        </dd>
+        <dt><span>Preferido</span></dt>
+        <dd>
+          <span>{{ pessoaContato.preferido }}</span>
+        </dd>
+        <dt><span>Receber Propagandas</span></dt>
+        <dd>
+          <span>{{ pessoaContato.receberPropagandas }}</span>
+        </dd>
+        <dt><span>Receber Confirmacoes</span></dt>
+        <dd>
+          <span>{{ pessoaContato.receberConfirmacoes }}</span>
+        </dd>
+        <dt><span>Possui Whatsapp</span></dt>
+        <dd>
+          <span>{{ pessoaContato.possuiWhatsapp }}</span>
+        </dd>
+        <dt><span>Contato</span></dt>
+        <dd>
+          <div *ngIf="pessoaContato.contato">
+            <a [routerLink]="['/pessoa', pessoaContato.contato?.id, 'view']">{{ pessoaContato.contato?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pessoa-contato', pessoaContato.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

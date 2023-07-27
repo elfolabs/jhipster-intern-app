@@ -1,0 +1,238 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pessoa-contato-heading" data-cy="PessoaContatoCreateUpdateHeading">Create or edit a Pessoa Contato</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataRegistro" ngbTooltip="default current_date, replicando do histórico"
+            >Data Registro</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dataRegistro"
+              data-cy="dataRegistro"
+              type="datetime-local"
+              class="form-control"
+              name="dataRegistro"
+              formControlName="dataRegistro"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('dataRegistro')!.invalid && (editForm.get('dataRegistro')!.dirty || editForm.get('dataRegistro')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('dataRegistro')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataRegistro')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataImportacao">Data Importacao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataImportacao"
+              data-cy="dataImportacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataImportacao"
+              formControlName="dataImportacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataExclusao">Data Exclusao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataExclusao"
+              data-cy="dataExclusao"
+              type="datetime-local"
+              class="form-control"
+              name="dataExclusao"
+              formControlName="dataExclusao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_contatoDigitalIdent"
+            ngbTooltip="identificação na Rede Social, exemplo &#34;superlauro&#34;"
+            >Contato Digital Ident</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contatoDigitalIdent"
+            id="field_contatoDigitalIdent"
+            data-cy="contatoDigitalIdent"
+            formControlName="contatoDigitalIdent"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_telefoneNumeroCompleto"
+            ngbTooltip="pode ter o simbolo &#39;plus&#39;, ddi, ddd alem do numero"
+            >Telefone Numero Completo</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telefoneNumeroCompleto"
+            id="field_telefoneNumeroCompleto"
+            data-cy="telefoneNumeroCompleto"
+            formControlName="telefoneNumeroCompleto"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_telefoneDdd" ngbTooltip="Caso o contato seja um número de telefone"
+            >Telefone Ddd</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="telefoneDdd"
+            id="field_telefoneDdd"
+            data-cy="telefoneDdd"
+            formControlName="telefoneDdd"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_telefoneNumero" ngbTooltip="Caso o contato seja um número de telefone"
+            >Telefone Numero</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="telefoneNumero"
+            id="field_telefoneNumero"
+            data-cy="telefoneNumero"
+            formControlName="telefoneNumero"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_preferido">Preferido</label>
+          <input type="checkbox" class="form-check" name="preferido" id="field_preferido" data-cy="preferido" formControlName="preferido" />
+          <div *ngIf="editForm.get('preferido')!.invalid && (editForm.get('preferido')!.dirty || editForm.get('preferido')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('preferido')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_receberPropagandas">Receber Propagandas</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="receberPropagandas"
+            id="field_receberPropagandas"
+            data-cy="receberPropagandas"
+            formControlName="receberPropagandas"
+          />
+          <div
+            *ngIf="
+              editForm.get('receberPropagandas')!.invalid &&
+              (editForm.get('receberPropagandas')!.dirty || editForm.get('receberPropagandas')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('receberPropagandas')?.errors?.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_receberConfirmacoes">Receber Confirmacoes</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="receberConfirmacoes"
+            id="field_receberConfirmacoes"
+            data-cy="receberConfirmacoes"
+            formControlName="receberConfirmacoes"
+          />
+          <div
+            *ngIf="
+              editForm.get('receberConfirmacoes')!.invalid &&
+              (editForm.get('receberConfirmacoes')!.dirty || editForm.get('receberConfirmacoes')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('receberConfirmacoes')?.errors?.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_possuiWhatsapp">Possui Whatsapp</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="possuiWhatsapp"
+            id="field_possuiWhatsapp"
+            data-cy="possuiWhatsapp"
+            formControlName="possuiWhatsapp"
+          />
+          <div
+            *ngIf="
+              editForm.get('possuiWhatsapp')!.invalid && (editForm.get('possuiWhatsapp')!.dirty || editForm.get('possuiWhatsapp')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('possuiWhatsapp')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_contato">Contato</label>
+          <select class="form-control" id="field_contato" data-cy="contato" name="contato" formControlName="contato">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pessoaOption.id === editForm.get('contato')!.value?.id ? editForm.get('contato')!.value : pessoaOption"
+              *ngFor="let pessoaOption of pessoasSharedCollection; trackBy: trackPessoaById"
+            >
+              {{ pessoaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

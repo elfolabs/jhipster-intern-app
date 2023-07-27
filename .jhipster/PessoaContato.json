@@ -1,0 +1,81 @@
+{
+  "applications": "*",
+  "changelogDate": "20230727233436",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "pessoa_contato",
+  "fields": [
+    {
+      "fieldName": "dataRegistro",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"],
+      "javadoc": "default current_date, replicando do histórico"
+    },
+    {
+      "fieldName": "dataImportacao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dataExclusao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contatoDigitalIdent",
+      "fieldType": "String",
+      "javadoc": "identificação na Rede Social, exemplo \"superlauro\""
+    },
+    {
+      "fieldName": "telefoneNumeroCompleto",
+      "fieldType": "String",
+      "javadoc": "pode ter o simbolo 'plus', ddi, ddd alem do numero"
+    },
+    {
+      "fieldName": "telefoneDdd",
+      "fieldType": "Integer",
+      "javadoc": "Caso o contato seja um número de telefone"
+    },
+    {
+      "fieldName": "telefoneNumero",
+      "fieldType": "Long",
+      "javadoc": "Caso o contato seja um número de telefone"
+    },
+    {
+      "fieldName": "preferido",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "receberPropagandas",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "receberConfirmacoes",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "possuiWhatsapp",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PessoaContato",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pessoa",
+      "otherEntityRelationshipName": "pessoaContato",
+      "relationshipName": "contato",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

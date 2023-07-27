@@ -1,0 +1,107 @@
+{
+  "applications": "*",
+  "changelogDate": "20230727233435",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "pessoa",
+  "fields": [
+    {
+      "fieldName": "dataRegistro",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"],
+      "javadoc": "default current_date, replicando do histórico"
+    },
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomeSocial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "possuiNomeSocial",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "apelidoNomeFantasia",
+      "fieldType": "String",
+      "javadoc": "Valor preferido em todas as telas, exceto a emissão de documentos médicos"
+    },
+    {
+      "fieldName": "dataNascimento",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nomePai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomeMae",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoSanguineo",
+      "fieldType": "TipoSanguineo",
+      "fieldValues": "A_POS,A_NEG,B_POS,B_NEG,O_POS,O_NEG,AB_POS,AB_NEG"
+    },
+    {
+      "fieldName": "sexoBiologicoAoNascer",
+      "fieldType": "Sexo",
+      "fieldValues": "M,F,O",
+      "javadoc": "Obrigatorio para TipoPessoa::PESSOA_FISICA, valor default F"
+    },
+    {
+      "fieldName": "tipoPessoa",
+      "fieldType": "TipoPessoa",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PF,PJ",
+      "javadoc": "default PF"
+    },
+    {
+      "fieldName": "cpf",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cnpj",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rg",
+      "fieldType": "String",
+      "javadoc": "RG Caso TipoPessoa::PESSOA_FISICA, e Inscrição Estadual em caso contrário"
+    },
+    {
+      "fieldName": "ie",
+      "fieldType": "String",
+      "javadoc": "Inscricao estadual caso TipoPessoa::PESSOA_JURIDCA"
+    },
+    {
+      "fieldName": "estadoCivil",
+      "fieldType": "EstadoCivil",
+      "fieldValues": "SOLTEIRO (SOL),CASADO (CAS),VIUVO (VIU),DIVORCIADO (DIV),SEPARADO (SEP),UNIAO_ESTAVEL (UNI)"
+    },
+    {
+      "fieldName": "observacoes",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "naturalidade",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "raca",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Pessoas podem ser PJ ou PF\\nApenas PF podem ser Atendidas\\nMas um cadastro unificado incluindo PJ servirá para o módulo financeiro\\nInclusive os profissionais são PF neste cadastro",
+  "jpaMetamodelFiltering": false,
+  "name": "Pessoa",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

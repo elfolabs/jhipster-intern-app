@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Pessoa.
+    -->
+    <changeSet id="20230727233435-1" author="jhipster">
+        <createTable tableName="pessoa" remarks="Pessoas podem ser PJ ou PF\nApenas PF podem ser Atendidas\nMas um cadastro unificado incluindo PJ servirá para o módulo financeiro\nInclusive os profissionais são PF neste cadastro">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="data_registro" type="${datetimeType}" remarks="default current_date, replicando do histórico">
+                <constraints nullable="false" />
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="nome_social" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="possui_nome_social" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="apelido_nome_fantasia" type="varchar(255)" remarks="Valor preferido em todas as telas, exceto a emissão de documentos médicos">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_nascimento" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="nome_pai" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="nome_mae" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="tipo_sanguineo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sexo_biologico_ao_nascer" type="varchar(255)" remarks="Obrigatorio para TipoPessoa::PESSOA_FISICA, valor default F">
+                <constraints nullable="true" />
+            </column>
+            <column name="tipo_pessoa" type="varchar(255)" remarks="default PF">
+                <constraints nullable="false" />
+            </column>
+            <column name="cpf" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cnpj" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="rg" type="varchar(255)" remarks="RG Caso TipoPessoa::PESSOA_FISICA, e Inscrição Estadual em caso contrário">
+                <constraints nullable="true" />
+            </column>
+            <column name="ie" type="varchar(255)" remarks="Inscricao estadual caso TipoPessoa::PESSOA_JURIDCA">
+                <constraints nullable="true" />
+            </column>
+            <column name="estado_civil" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="observacoes" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="naturalidade" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="raca" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="pessoa" columnName="data_registro" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20230727233435-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/pessoa.csv"
+                  separator=";"
+                  tableName="pessoa"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="data_registro" type="date"/>
+            <column name="nome" type="string"/>
+            <column name="nome_social" type="string"/>
+            <column name="possui_nome_social" type="boolean"/>
+            <column name="apelido_nome_fantasia" type="string"/>
+            <column name="data_nascimento" type="date"/>
+            <column name="nome_pai" type="string"/>
+            <column name="nome_mae" type="string"/>
+            <column name="tipo_sanguineo" type="string"/>
+            <column name="sexo_biologico_ao_nascer" type="string"/>
+            <column name="tipo_pessoa" type="string"/>
+            <column name="cpf" type="string"/>
+            <column name="cnpj" type="string"/>
+            <column name="rg" type="string"/>
+            <column name="ie" type="string"/>
+            <column name="estado_civil" type="string"/>
+            <column name="observacoes" type="clob"/>
+            <column name="naturalidade" type="string"/>
+            <column name="raca" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

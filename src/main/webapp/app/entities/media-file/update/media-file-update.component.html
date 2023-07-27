@@ -1,0 +1,213 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-media-file-heading" data-cy="MediaFileCreateUpdateHeading">Create or edit a Media File</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_mediaType" ngbTooltip="Refs: www.iana.org/assignments/media-types/media-types.xhtml"
+            >Media Type</label
+          >
+          <input type="text" class="form-control" name="mediaType" id="field_mediaType" data-cy="mediaType" formControlName="mediaType" />
+          <div *ngIf="editForm.get('mediaType')!.invalid && (editForm.get('mediaType')!.dirty || editForm.get('mediaType')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('mediaType')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fileName" ngbTooltip="Nome do arquivo">File Name</label>
+          <input type="text" class="form-control" name="fileName" id="field_fileName" data-cy="fileName" formControlName="fileName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fileExtension">File Extension</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fileExtension"
+            id="field_fileExtension"
+            data-cy="fileExtension"
+            formControlName="fileExtension"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_mediaTitle">Media Title</label>
+          <input
+            type="text"
+            class="form-control"
+            name="mediaTitle"
+            id="field_mediaTitle"
+            data-cy="mediaTitle"
+            formControlName="mediaTitle"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_mediaDescription">Media Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="mediaDescription"
+            id="field_mediaDescription"
+            data-cy="mediaDescription"
+            formControlName="mediaDescription"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_publico" ngbTooltip="default false">Publico</label>
+          <input type="checkbox" class="form-check" name="publico" id="field_publico" data-cy="publico" formControlName="publico" />
+          <div *ngIf="editForm.get('publico')!.invalid && (editForm.get('publico')!.dirty || editForm.get('publico')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('publico')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_repoName" ngbTooltip="Nome do Bucket do repositório S3">Repo Name</label>
+          <input type="text" class="form-control" name="repoName" id="field_repoName" data-cy="repoName" formControlName="repoName" />
+          <div *ngIf="editForm.get('repoName')!.invalid && (editForm.get('repoName')!.dirty || editForm.get('repoName')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('repoName')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_repoUuid" ngbTooltip="UUID no repositório S3">Repo Uuid</label>
+          <input type="text" class="form-control" name="repoUuid" id="field_repoUuid" data-cy="repoUuid" formControlName="repoUuid" />
+          <div *ngIf="editForm.get('repoUuid')!.invalid && (editForm.get('repoUuid')!.dirty || editForm.get('repoUuid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('repoUuid')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_repoFolder" ngbTooltip="Folder de destino no S3">Repo Folder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="repoFolder"
+            id="field_repoFolder"
+            data-cy="repoFolder"
+            formControlName="repoFolder"
+          />
+          <div *ngIf="editForm.get('repoFolder')!.invalid && (editForm.get('repoFolder')!.dirty || editForm.get('repoFolder')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('repoFolder')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            for="field_repoPath"
+            ngbTooltip="path completo com folder de destino e nome do arquivo no repositorio"
+            >Repo Path</label
+          >
+          <input type="text" class="form-control" name="repoPath" id="field_repoPath" data-cy="repoPath" formControlName="repoPath" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_thumbnail">Thumbnail</label>
+          <input type="checkbox" class="form-check" name="thumbnail" id="field_thumbnail" data-cy="thumbnail" formControlName="thumbnail" />
+          <div *ngIf="editForm.get('thumbnail')!.invalid && (editForm.get('thumbnail')!.dirty || editForm.get('thumbnail')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('thumbnail')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_width">Width</label>
+          <input type="number" class="form-control" name="width" id="field_width" data-cy="width" formControlName="width" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_height">Height</label>
+          <input type="number" class="form-control" name="height" id="field_height" data-cy="height" formControlName="height" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataRegistro">Data Registro</label>
+          <div class="d-flex">
+            <input
+              id="field_dataRegistro"
+              data-cy="dataRegistro"
+              type="datetime-local"
+              class="form-control"
+              name="dataRegistro"
+              formControlName="dataRegistro"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('dataRegistro')!.invalid && (editForm.get('dataRegistro')!.dirty || editForm.get('dataRegistro')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('dataRegistro')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataRegistro')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dataExclusao">Data Exclusao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataExclusao"
+              data-cy="dataExclusao"
+              type="datetime-local"
+              class="form-control"
+              name="dataExclusao"
+              formControlName="dataExclusao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tamanhoBytes">Tamanho Bytes</label>
+          <input
+            type="number"
+            class="form-control"
+            name="tamanhoBytes"
+            id="field_tamanhoBytes"
+            data-cy="tamanhoBytes"
+            formControlName="tamanhoBytes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fotoRosto">Foto Rosto</label>
+          <select class="form-control" id="field_fotoRosto" data-cy="fotoRosto" name="fotoRosto" formControlName="fotoRosto">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pessoaOption.id === editForm.get('fotoRosto')!.value?.id ? editForm.get('fotoRosto')!.value : pessoaOption"
+              *ngFor="let pessoaOption of pessoasSharedCollection; trackBy: trackPessoaById"
+            >
+              {{ pessoaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

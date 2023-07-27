@@ -1,0 +1,106 @@
+<div>
+  <h2 id="page-heading" data-cy="PessoaContatoHeading">
+    <span>Pessoa Contatoes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pessoa-contato"
+        [routerLink]="['/pessoa-contato/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Pessoa Contato </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pessoaContatoes?.length === 0">
+    <span>No pessoaContatoes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="pessoaContatoes && pessoaContatoes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataRegistro"><span>Data Registro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataImportacao"><span>Data Importacao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataExclusao"><span>Data Exclusao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao"><span>Descricao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="contatoDigitalIdent"><span>Contato Digital Ident</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telefoneNumeroCompleto"><span>Telefone Numero Completo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telefoneDdd"><span>Telefone Ddd</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telefoneNumero"><span>Telefone Numero</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="preferido"><span>Preferido</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="receberPropagandas"><span>Receber Propagandas</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="receberConfirmacoes"><span>Receber Confirmacoes</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="possuiWhatsapp"><span>Possui Whatsapp</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="contato.id"><span>Contato</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let pessoaContato of pessoaContatoes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pessoa-contato', pessoaContato.id, 'view']">{{ pessoaContato.id }}</a>
+          </td>
+          <td>{{ pessoaContato.dataRegistro | formatMediumDatetime }}</td>
+          <td>{{ pessoaContato.dataImportacao | formatMediumDatetime }}</td>
+          <td>{{ pessoaContato.dataExclusao | formatMediumDatetime }}</td>
+          <td>{{ pessoaContato.descricao }}</td>
+          <td>{{ pessoaContato.contatoDigitalIdent }}</td>
+          <td>{{ pessoaContato.telefoneNumeroCompleto }}</td>
+          <td>{{ pessoaContato.telefoneDdd }}</td>
+          <td>{{ pessoaContato.telefoneNumero }}</td>
+          <td>{{ pessoaContato.preferido }}</td>
+          <td>{{ pessoaContato.receberPropagandas }}</td>
+          <td>{{ pessoaContato.receberConfirmacoes }}</td>
+          <td>{{ pessoaContato.possuiWhatsapp }}</td>
+          <td>
+            <div *ngIf="pessoaContato.contato">
+              <a [routerLink]="['/pessoa', pessoaContato.contato?.id, 'view']">{{ pessoaContato.contato?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pessoa-contato', pessoaContato.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pessoa-contato', pessoaContato.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pessoaContato)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

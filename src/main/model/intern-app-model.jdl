@@ -1,0 +1,124 @@
+// Set pagination options
+// paginate * with infinite-scroll
+//paginate Procedimento, Cid with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
+
+entity MediaFile {
+    mediaType String required /** Refs: www.iana.org/assignments/media-types/media-types.xhtml */
+    fileName String /** Nome do arquivo */
+    fileExtension String
+    mediaTitle String
+    mediaDescription String
+    publico Boolean required /** default false */
+    repoName String required /** Nome do Bucket do repositório S3 */
+    repoUuid String required /** UUID no repositório S3 */
+    repoFolder String required /** Folder de destino no S3 */
+    repoPath String /** path completo com folder de destino e nome do arquivo no repositorio */
+    thumbnail Boolean required
+    width Integer
+    height Integer
+    dataRegistro Instant required
+    dataExclusao Instant
+    tamanhoBytes Integer
+}
+
+/**
+ * Pessoas podem ser PJ ou PF
+ * Apenas PF podem ser Atendidas
+ * Mas um cadastro unificado incluindo PJ servirá para o módulo financeiro
+ * Inclusive os profissionais são PF neste cadastro
+ */
+entity Pessoa {
+    dataRegistro Instant required /** default current_date, replicando do histórico */
+    nome String required
+    nomeSocial String
+    possuiNomeSocial Boolean
+    apelidoNomeFantasia String /** Valor preferido em todas as telas, exceto a emissão de documentos médicos */
+    dataNascimento LocalDate
+    nomePai String
+    nomeMae String
+    tipoSanguineo TipoSanguineo
+    sexoBiologicoAoNascer Sexo /** Obrigatorio para TipoPessoa::PESSOA_FISICA, valor default F */
+    tipoPessoa TipoPessoa required /** default PF */
+    cpf String
+    cnpj String
+    rg String /** RG Caso TipoPessoa::PESSOA_FISICA, e Inscrição Estadual em caso contrário */
+    ie String /** Inscricao estadual caso TipoPessoa::PESSOA_JURIDCA*/
+    estadoCivil EstadoCivil
+    observacoes TextBlob
+    naturalidade String
+    raca String
+}
+enum EstadoCivil{
+    SOLTEIRO("SOL")
+    CASADO("CAS")
+    VIUVO("VIU")
+    DIVORCIADO("DIV")
+    SEPARADO("SEP")
+    UNIAO_ESTAVEL("UNI")
+}
+enum Sexo {
+    M
+    F
+    O
+}
+
+enum TipoPessoa {
+    PF
+    PJ
+}
+
+enum TipoSanguineo {
+    A_POS
+    A_NEG
+    B_POS
+    B_NEG
+    O_POS
+    O_NEG
+    AB_POS
+    AB_NEG
+}
+
+entity PessoaContato{
+    dataRegistro Instant required /** default current_date, replicando do histórico */
+    dataImportacao Instant
+    dataExclusao Instant
+    descricao String
+    contatoDigitalIdent String /** identificação na Rede Social, exemplo "superlauro" */
+    telefoneNumeroCompleto String /** pode ter o simbolo 'plus', ddi, ddd alem do numero */
+    telefoneDdd Integer /** Caso o contato seja um número de telefone */
+    telefoneNumero Long  /** Caso o contato seja um número de telefone */
+    preferido Boolean required
+    receberPropagandas Boolean required
+    receberConfirmacoes Boolean required
+    possuiWhatsapp Boolean required
+}
+entity PessoaRedeSocial {
+    nomeRede String required
+    endereco String maxlength(2000)
+    dataRegistro Instant required
+    dataExclusao Instant
+    divulgarNoAplicativo Boolean
+}
+
+/* --------
+ * RELACOES
+ * --------
+ **/
+
+relationship ManyToOne{
+    MediaFile{fotoRosto} to Pessoa
+    PessoaContato{contato} to Pessoa
+    PessoaRedeSocial{redeSocial} to Pessoa
+}
+
+
+paginate * with infinite-scroll

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity MediaFile.
+    -->
+    <changeSet id="20230727233434-1" author="jhipster">
+        <createTable tableName="media_file">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="media_type" type="varchar(255)" remarks="Refs: www.iana.org/assignments/media-types/media-types.xhtml">
+                <constraints nullable="false" />
+            </column>
+            <column name="file_name" type="varchar(255)" remarks="Nome do arquivo">
+                <constraints nullable="true" />
+            </column>
+            <column name="file_extension" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="media_title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="media_description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="publico" type="boolean" remarks="default false">
+                <constraints nullable="false" />
+            </column>
+            <column name="repo_name" type="varchar(255)" remarks="Nome do Bucket do repositório S3">
+                <constraints nullable="false" />
+            </column>
+            <column name="repo_uuid" type="varchar(255)" remarks="UUID no repositório S3">
+                <constraints nullable="false" />
+            </column>
+            <column name="repo_folder" type="varchar(255)" remarks="Folder de destino no S3">
+                <constraints nullable="false" />
+            </column>
+            <column name="repo_path" type="varchar(255)" remarks="path completo com folder de destino e nome do arquivo no repositorio">
+                <constraints nullable="true" />
+            </column>
+            <column name="thumbnail" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="width" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="height" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_registro" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="data_exclusao" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="tamanho_bytes" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="foto_rosto_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="media_file" columnName="data_registro" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="media_file" columnName="data_exclusao" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20230727233434-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/media_file.csv"
+                  separator=";"
+                  tableName="media_file"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="media_type" type="string"/>
+            <column name="file_name" type="string"/>
+            <column name="file_extension" type="string"/>
+            <column name="media_title" type="string"/>
+            <column name="media_description" type="string"/>
+            <column name="publico" type="boolean"/>
+            <column name="repo_name" type="string"/>
+            <column name="repo_uuid" type="string"/>
+            <column name="repo_folder" type="string"/>
+            <column name="repo_path" type="string"/>
+            <column name="thumbnail" type="boolean"/>
+            <column name="width" type="numeric"/>
+            <column name="height" type="numeric"/>
+            <column name="data_registro" type="date"/>
+            <column name="data_exclusao" type="date"/>
+            <column name="tamanho_bytes" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

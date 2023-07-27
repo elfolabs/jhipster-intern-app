@@ -1,0 +1,104 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pessoa">
+      <h2 data-cy="pessoaDetailsHeading"><span>Pessoa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ pessoa.id }}</span>
+        </dd>
+        <dt><span ngbTooltip="default current_date, replicando do histórico">Data Registro</span></dt>
+        <dd>
+          <span>{{ pessoa.dataRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Nome</span></dt>
+        <dd>
+          <span>{{ pessoa.nome }}</span>
+        </dd>
+        <dt><span>Nome Social</span></dt>
+        <dd>
+          <span>{{ pessoa.nomeSocial }}</span>
+        </dd>
+        <dt><span>Possui Nome Social</span></dt>
+        <dd>
+          <span>{{ pessoa.possuiNomeSocial }}</span>
+        </dd>
+        <dt><span ngbTooltip="Valor preferido em todas as telas, exceto a emissão de documentos médicos">Apelido Nome Fantasia</span></dt>
+        <dd>
+          <span>{{ pessoa.apelidoNomeFantasia }}</span>
+        </dd>
+        <dt><span>Data Nascimento</span></dt>
+        <dd>
+          <span>{{ pessoa.dataNascimento | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Nome Pai</span></dt>
+        <dd>
+          <span>{{ pessoa.nomePai }}</span>
+        </dd>
+        <dt><span>Nome Mae</span></dt>
+        <dd>
+          <span>{{ pessoa.nomeMae }}</span>
+        </dd>
+        <dt><span>Tipo Sanguineo</span></dt>
+        <dd>
+          <span>{{ pessoa.tipoSanguineo }}</span>
+        </dd>
+        <dt><span ngbTooltip="Obrigatorio para TipoPessoa::PESSOA_FISICA, valor default F">Sexo Biologico Ao Nascer</span></dt>
+        <dd>
+          <span>{{ pessoa.sexoBiologicoAoNascer }}</span>
+        </dd>
+        <dt><span ngbTooltip="default PF">Tipo Pessoa</span></dt>
+        <dd>
+          <span>{{ pessoa.tipoPessoa }}</span>
+        </dd>
+        <dt><span>Cpf</span></dt>
+        <dd>
+          <span>{{ pessoa.cpf }}</span>
+        </dd>
+        <dt><span>Cnpj</span></dt>
+        <dd>
+          <span>{{ pessoa.cnpj }}</span>
+        </dd>
+        <dt><span ngbTooltip="RG Caso TipoPessoa::PESSOA_FISICA, e Inscrição Estadual em caso contrário">Rg</span></dt>
+        <dd>
+          <span>{{ pessoa.rg }}</span>
+        </dd>
+        <dt><span ngbTooltip="Inscricao estadual caso TipoPessoa::PESSOA_JURIDCA">Ie</span></dt>
+        <dd>
+          <span>{{ pessoa.ie }}</span>
+        </dd>
+        <dt><span>Estado Civil</span></dt>
+        <dd>
+          <span>{{ pessoa.estadoCivil }}</span>
+        </dd>
+        <dt><span>Observacoes</span></dt>
+        <dd>
+          <span>{{ pessoa.observacoes }}</span>
+        </dd>
+        <dt><span>Naturalidade</span></dt>
+        <dd>
+          <span>{{ pessoa.naturalidade }}</span>
+        </dd>
+        <dt><span>Raca</span></dt>
+        <dd>
+          <span>{{ pessoa.raca }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
