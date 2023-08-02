@@ -1,4 +1,59 @@
-# internapp
+# Jhipster Intern App
+
+## Objetivo
+
+Esta é uma aplicação simples de teste que faz uso do Jhipster com um modelo de dados simples retratado abaixo:
+
+![plot](./docs/jhipster-data-model.png)
+
+Abaixo segue a documentação original gerada pelo Jhipster
+
+### Instalando e rodando o projeto
+
+Em geral, para rodar o projeto localente o que você precisa:
+
+1. Clonar o projeto do github
+
+2. Acessar o shell do diretório raiz do projeto e rodar o comando
+
+```
+npm install
+```
+
+3. Rodar o backend com o comando
+
+```
+mvnw
+```
+
+4. Rodar o frontend como o comando
+
+```
+npm start
+```
+
+5. Logando na aplicação
+
+Acesse no navegador o endereço:
+
+```
+http://localhost:9000/
+```
+
+Você pode usar para login um dos dois usuarios abaixo:
+
+- Usuario com perfil adminsitrador - login: `admin`, senha `admin`
+- Usuario comum - login: `user` , senha `user`
+
+6. Navegar pela aplicação
+
+Sobretudo menu `Entities` e seus submenus
+
+7. Teve problemas ao subir a aplicação?
+
+Para mais informações, veja a seção `Development` mais abaixo, na documentação original gerada pelo Jhipster neste mesmo arquivo
+
+## Documentation - Jhipster
 
 This application was generated using JHipster 7.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.6.0](https://www.jhipster.tech/documentation-archive/v7.6.0).
 
