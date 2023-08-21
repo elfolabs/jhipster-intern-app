@@ -49,7 +49,7 @@ public class PessoaContatoResource {
     }
 
     /**
-     * {@code POST  /pessoa-contatoes} : Create a new pessoaContato.
+     * {@code POST  tatoes} : Create a new pessoaContato.
      *
      * @param pessoaContatoDTO the pessoaContatoDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new pessoaContatoDTO, or with status {@code 400 (Bad Request)} if the pessoaContato has already an ID.

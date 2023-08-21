@@ -39,6 +39,18 @@ export class PessoaComponent implements OnInit {
     this.ascending = true;
   }
 
+  formatarCpf(cpf: string): string {
+    // Remove caracteres não numéricos do CPF
+    const cleanedCpf = cpf.replace(/\D/g, '');
+
+    // Formatação do CPF: XXX.XXX.XXX-XX
+    const formattedCpf = `${cleanedCpf.substring(0, 3)}.${cleanedCpf.substring(3, 6)}.${cleanedCpf.substring(6, 9)}-${cleanedCpf.substring(
+      9
+    )}`;
+
+    return formattedCpf; // Substitua pelo código de formatação real
+  }
+
   loadAll(): void {
     this.isLoading = true;
 

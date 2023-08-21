@@ -73,4 +73,9 @@ public class PessoaServiceImpl implements PessoaService {
         log.debug("Request to delete Pessoa : {}", id);
         pessoaRepository.deleteById(id);
     }
+
+    @Override
+    public Page<PessoaDTO> findAllNotExcluded(Pageable pageable) {
+        return pessoaRepository.findAllByDataExclusaoIsNull(pageable).map(pessoaMapper::toDto);
+    }
 }

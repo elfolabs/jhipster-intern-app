@@ -48,6 +48,12 @@ public class PessoaContatoDTO implements Serializable {
      * Caso o contato seja um número de telefone
      */
     @Schema(description = "Caso o contato seja um número de telefone")
+    private Integer telefoneDdi;
+
+    /**
+     * Caso o contato seja um número de telefone
+     */
+    @Schema(description = "Caso o contato seja um número de telefone")
     private Long telefoneNumero;
 
     @NotNull
@@ -126,6 +132,16 @@ public class PessoaContatoDTO implements Serializable {
 
     public void setTelefoneDdd(Integer telefoneDdd) {
         this.telefoneDdd = telefoneDdd;
+    }
+
+    //
+
+    public Integer getTelefoneDdi() {
+        return telefoneDdi;
+    }
+
+    public void setTelefoneDdi(Integer telefoneDdi) {
+        this.telefoneDdi = telefoneDdi;
     }
 
     public Long getTelefoneNumero() {
@@ -209,6 +225,7 @@ public class PessoaContatoDTO implements Serializable {
             ", contatoDigitalIdent='" + getContatoDigitalIdent() + "'" +
             ", telefoneNumeroCompleto='" + getTelefoneNumeroCompleto() + "'" +
             ", telefoneDdd=" + getTelefoneDdd() +
+            ", telefoneDdi=" + getTelefoneDdi() +
             ", telefoneNumero=" + getTelefoneNumero() +
             ", preferido='" + getPreferido() + "'" +
             ", receberPropagandas='" + getReceberPropagandas() + "'" +

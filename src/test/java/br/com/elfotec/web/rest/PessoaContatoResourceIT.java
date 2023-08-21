@@ -55,6 +55,9 @@ class PessoaContatoResourceIT {
     private static final Integer DEFAULT_TELEFONE_DDD = 1;
     private static final Integer UPDATED_TELEFONE_DDD = 2;
 
+    private static final Integer DEFAULT_TELEFONE_DDI = 1;
+    private static final Integer UPDATED_TELEFONE_DDI = 2;
+
     private static final Long DEFAULT_TELEFONE_NUMERO = 1L;
     private static final Long UPDATED_TELEFONE_NUMERO = 2L;
 
@@ -105,6 +108,7 @@ class PessoaContatoResourceIT {
             .contatoDigitalIdent(DEFAULT_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(DEFAULT_TELEFONE_NUMERO_COMPLETO)
             .telefoneDdd(DEFAULT_TELEFONE_DDD)
+            .telefoneDdi(DEFAULT_TELEFONE_DDI)
             .telefoneNumero(DEFAULT_TELEFONE_NUMERO)
             .preferido(DEFAULT_PREFERIDO)
             .receberPropagandas(DEFAULT_RECEBER_PROPAGANDAS)
@@ -128,6 +132,7 @@ class PessoaContatoResourceIT {
             .contatoDigitalIdent(UPDATED_CONTATO_DIGITAL_IDENT)
             .telefoneNumeroCompleto(UPDATED_TELEFONE_NUMERO_COMPLETO)
             .telefoneDdd(UPDATED_TELEFONE_DDD)
+            .telefoneDdi(UPDATED_TELEFONE_DDI)
             .telefoneNumero(UPDATED_TELEFONE_NUMERO)
             .preferido(UPDATED_PREFERIDO)
             .receberPropagandas(UPDATED_RECEBER_PROPAGANDAS)

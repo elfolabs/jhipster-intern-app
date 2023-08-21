@@ -113,6 +113,11 @@ public class Pessoa implements Serializable {
     @Column(name = "raca")
     private String raca;
 
+    // adicionando coluna data_exclusao
+    @NotNull
+    @Column(name = "data_exclusao", nullable = false)
+    private Instant dataExclusao;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -139,6 +144,20 @@ public class Pessoa implements Serializable {
 
     public void setDataRegistro(Instant dataRegistro) {
         this.dataRegistro = dataRegistro;
+    }
+
+    //add dataexclusao
+    public Instant getDataExclusao() {
+        return this.dataExclusao;
+    }
+
+    public Pessoa dataExclusao(Instant dataExclusao) {
+        this.setDataExclusao(dataExclusao);
+        return this;
+    }
+
+    public void setDataExclusao(Instant dataExclusao) {
+        this.dataExclusao = dataExclusao;
     }
 
     public String getNome() {
@@ -400,6 +419,7 @@ public class Pessoa implements Serializable {
         return "Pessoa{" +
             "id=" + getId() +
             ", dataRegistro='" + getDataRegistro() + "'" +
+            ", dataExclusao='" + getDataExclusao() + "'" +
             ", nome='" + getNome() + "'" +
             ", nomeSocial='" + getNomeSocial() + "'" +
             ", possuiNomeSocial='" + getPossuiNomeSocial() + "'" +

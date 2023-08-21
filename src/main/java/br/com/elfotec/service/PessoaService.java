@@ -34,6 +34,14 @@ public interface PessoaService {
     Page<PessoaDTO> findAll(Pageable pageable);
 
     /**
+     * Get all the pessoas.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<PessoaDTO> findAllNotExcluded(Pageable pageable);
+
+    /**
      * Get the "id" pessoa.
      *
      * @param id the id of the entity.
