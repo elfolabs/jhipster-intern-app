@@ -33,26 +33,14 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
           <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dataRegistro"><span>Data Registro</span> <fa-icon icon="sort"></fa-icon></th>
+
           <th scope="col" jhiSortBy="nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nomeSocial"><span>Nome Social</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="possuiNomeSocial"><span>Possui Nome Social</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="apelidoNomeFantasia"><span>Apelido Nome Fantasia</span> <fa-icon icon="sort"></fa-icon></th>
+
           <th scope="col" jhiSortBy="dataNascimento"><span>Data Nascimento</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nomePai"><span>Nome Pai</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nomeMae"><span>Nome Mae</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="tipoSanguineo"><span>Tipo Sanguineo</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="sexoBiologicoAoNascer"><span>Sexo Biologico Ao Nascer</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="tipoPessoa"><span>Tipo Pessoa</span> <fa-icon icon="sort"></fa-icon></th>
+
           <th scope="col" jhiSortBy="cpf"><span>Cpf</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="cnpj"><span>Cnpj</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="rg"><span>Rg</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="ie"><span>Ie</span> <fa-icon icon="sort"></fa-icon></th>
+
           <th scope="col" jhiSortBy="estadoCivil"><span>Estado Civil</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="observacoes"><span>Observacoes</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="naturalidade"><span>Naturalidade</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="raca"><span>Raca</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
@@ -60,25 +48,14 @@
           <td>
             <a [routerLink]="['/pessoa', pessoa.id, 'view']">{{ pessoa.id }}</a>
           </td>
-          <td>{{ pessoa.dataRegistro | formatMediumDatetime }}</td>
           <td>{{ pessoa.nome }}</td>
-          <td>{{ pessoa.nomeSocial }}</td>
-          <td>{{ pessoa.possuiNomeSocial }}</td>
-          <td>{{ pessoa.apelidoNomeFantasia }}</td>
+
           <td>{{ pessoa.dataNascimento | formatMediumDate }}</td>
-          <td>{{ pessoa.nomePai }}</td>
-          <td>{{ pessoa.nomeMae }}</td>
-          <td>{{ pessoa.tipoSanguineo }}</td>
-          <td>{{ pessoa.sexoBiologicoAoNascer }}</td>
-          <td>{{ pessoa.tipoPessoa }}</td>
-          <td>{{ pessoa.cpf }}</td>
-          <td>{{ pessoa.cnpj }}</td>
-          <td>{{ pessoa.rg }}</td>
-          <td>{{ pessoa.ie }}</td>
+
+          <td>{{ pessoa.cpf ? formatarCpf(pessoa.cpf) : 'CPF não disponível' }}</td>
+
           <td>{{ pessoa.estadoCivil }}</td>
-          <td>{{ pessoa.observacoes }}</td>
-          <td>{{ pessoa.naturalidade }}</td>
-          <td>{{ pessoa.raca }}</td>
+
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

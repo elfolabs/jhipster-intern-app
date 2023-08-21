@@ -95,6 +95,7 @@ entity PessoaContato{
     contatoDigitalIdent String /** identificação na Rede Social, exemplo "superlauro" */
     telefoneNumeroCompleto String /** pode ter o simbolo 'plus', ddi, ddd alem do numero */
     telefoneDdd Integer /** Caso o contato seja um número de telefone */
+    telefoneDdi Integer /** Caso o contato seja um número de telefone */
     telefoneNumero Long  /** Caso o contato seja um número de telefone */
     preferido Boolean required
     receberPropagandas Boolean required

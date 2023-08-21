@@ -39,6 +39,11 @@
       "javadoc": "Caso o contato seja um número de telefone"
     },
     {
+      "fieldName": "telefoneDdi",
+      "fieldType": "Integer",
+      "javadoc": "Caso o contato seja um número de telefone"
+    },
+    {
       "fieldName": "telefoneNumero",
       "fieldType": "Long",
       "javadoc": "Caso o contato seja um número de telefone"

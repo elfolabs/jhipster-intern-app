@@ -1,11 +1,13 @@
 package br.com.elfotec.web.rest;
 
+import br.com.elfotec.domain.Pessoa;
 import br.com.elfotec.repository.PessoaRepository;
 import br.com.elfotec.service.PessoaService;
 import br.com.elfotec.service.dto.PessoaDTO;
 import br.com.elfotec.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -147,7 +149,8 @@ public class PessoaResource {
     @GetMapping("/pessoas")
     public ResponseEntity<List<PessoaDTO>> getAllPessoas(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Pessoas");
-        Page<PessoaDTO> page = pessoaService.findAll(pageable);
+
+        Page<PessoaDTO> page = pessoaService.findAllNotExcluded(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -173,8 +176,15 @@ public class PessoaResource {
      */
     @DeleteMapping("/pessoas/{id}")
     public ResponseEntity<Void> deletePessoa(@PathVariable Long id) {
-        log.debug("REST request to delete Pessoa : {}", id);
-        pessoaService.delete(id);
+        log.debug("REST request to delete Pessoa: {}", id);
+
+        Optional<PessoaDTO> pessoaDTOOptional = pessoaService.findOne(id);
+
+        pessoaDTOOptional.ifPresent(pessoaDTO -> {
+            pessoaDTO.setDataExclusao(Instant.now()); // Definir a data de exclusão
+            pessoaService.save(pessoaDTO); // Salvar a pessoa com a data de exclusão atualizada
+        });
+
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))

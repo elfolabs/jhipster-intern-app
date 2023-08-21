@@ -57,6 +57,9 @@ public class PessoaContato implements Serializable {
     @Column(name = "telefone_ddd")
     private Integer telefoneDdd;
 
+    @Column(name = "telefone_ddi")
+    private Integer telefoneDdi;
+
     /**
      * Caso o contato seja um número de telefone
      */
@@ -188,6 +191,20 @@ public class PessoaContato implements Serializable {
         this.telefoneDdd = telefoneDdd;
     }
 
+    //
+    public Integer getTelefoneDdi() {
+        return this.telefoneDdi;
+    }
+
+    public PessoaContato telefoneDdi(Integer telefoneDdi) {
+        this.setTelefoneDdi(telefoneDdi);
+        return this;
+    }
+
+    public void setTelefoneDdi(Integer telefoneDdi) {
+        this.telefoneDdi = telefoneDdi;
+    }
+
     public Long getTelefoneNumero() {
         return this.telefoneNumero;
     }
@@ -297,6 +314,7 @@ public class PessoaContato implements Serializable {
             ", contatoDigitalIdent='" + getContatoDigitalIdent() + "'" +
             ", telefoneNumeroCompleto='" + getTelefoneNumeroCompleto() + "'" +
             ", telefoneDdd=" + getTelefoneDdd() +
+            ", telefoneDdi=" + getTelefoneDdi() +
             ", telefoneNumero=" + getTelefoneNumero() +
             ", preferido='" + getPreferido() + "'" +
             ", receberPropagandas='" + getReceberPropagandas() + "'" +
