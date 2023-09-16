@@ -47,4 +47,10 @@ public interface MediaFileService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    /**
+     * Logically delete the "id" mediaFile.
+     *
+     * @param id the id of the entity.
+     */
+
 }

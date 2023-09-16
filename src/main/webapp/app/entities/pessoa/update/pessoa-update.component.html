@@ -125,8 +125,8 @@
             id="field_tipoSanguineo"
             data-cy="tipoSanguineo"
           >
-            <option [ngValue]="null"></option>
-            <option *ngFor="let tipoSanguineo of tipoSanguineoValues" [value]="tipoSanguineo">tipoSanguineo</option>
+            <option [ngValue]="null">Selecione o tipo sanguineo</option>
+            <option *ngFor="let tipoSanguineo of tipoSanguineoValues" [value]="tipoSanguineo">{{ tipoSanguineo }}</option>
           </select>
         </div>
 
@@ -145,7 +145,7 @@
             data-cy="sexoBiologicoAoNascer"
           >
             <option [ngValue]="null"></option>
-            <option *ngFor="let sexo of sexoValues" [value]="sexo">sexo</option>
+            <option *ngFor="let sexo of sexoValues" [value]="sexo">{{ sexo }}</option>
           </select>
         </div>
 
@@ -189,7 +189,7 @@
           <label class="form-control-label" for="field_estadoCivil">Estado Civil</label>
           <select class="form-control" name="estadoCivil" formControlName="estadoCivil" id="field_estadoCivil" data-cy="estadoCivil">
             <option [ngValue]="null"></option>
-            <option *ngFor="let estadoCivil of estadoCivilValues" [value]="estadoCivil">estadoCivil</option>
+            <option *ngFor="let estadoCivil of estadoCivilValues" [value]="estadoCivil">{{ estadoCivil }}</option>
           </select>
         </div>
 

@@ -108,6 +108,7 @@
   },
   "defaultProject": "internapp",
   "cli": {
+    "analytics": false,
     "cache": {
       "enabled": true,
       "path": "./target/",
